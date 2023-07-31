@@ -4,6 +4,7 @@ import ge.toyboom.customers.entities.Customer;
 import ge.toyboom.customers.entities.CustomersSearchParams;
 import ge.toyboom.customers.exceptions.IllegalArgumentException;
 import ge.toyboom.customers.exceptions.NotFoundException;
+import ge.toyboom.customers.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,6 +17,11 @@ import java.util.stream.Stream;
 public class CustomersService implements ge.toyboom.customers.services.interfaces.CustomersService {
     private static Long id = 0L;
     private final List<Customer> dataBase = new ArrayList<>();
+    private final CustomerRepository customerRepository;
+
+    public CustomersService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public List<Customer> getAllCustomer(CustomersSearchParams customersSearchParams) {
